@@ -1,0 +1,12 @@
+{
+  "name": "eli-test-scanner",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Isao Kozakai <isaokozakai@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "mobile"
+  ]
+}
