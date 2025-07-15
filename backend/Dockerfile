@@ -2,10 +2,13 @@ FROM node:22
 
 WORKDIR /app
 
-COPY package.json yarn.lock ./
+COPY backend/package.json ./
+
+COPY yarn.lock ./
+
 RUN yarn install
 
-COPY . .
+COPY backend/ ./
 
 EXPOSE 3000
 

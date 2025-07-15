@@ -12,7 +12,9 @@ services:
       - "5432:5432"
 
   backend:
-    build: ./backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
     environment:
       DATABASE_URL: postgresql://eli_user:eli_password@postgres:5432/eli_test_strips
       NODE_ENV: development
