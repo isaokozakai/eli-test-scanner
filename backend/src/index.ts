@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
-import path from "path";
-import { uploadRouter } from "./routes/upload";
+import { testStripsRouter } from "./routes/test_strips";
+import { UPLOAD_DIR } from "./constants/paths";
 
 dotenv.config();
 
@@ -12,13 +12,10 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 // serve static files (thumbnails, uploaded images)
-app.use(
-  "/uploads",
-  express.static(path.join(__dirname, "..", "..", "uploads"))
-);
+app.use("/uploads", express.static(UPLOAD_DIR));
 
 // API routes
-app.use("/api/test-strips", uploadRouter);
+app.use("/api/test-strips", testStripsRouter);
 
 // health check
 app.get("/", (_, res) => {

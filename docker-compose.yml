@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   postgres:
     image: postgres:15
@@ -16,7 +17,7 @@ services:
       context: .
       dockerfile: backend/Dockerfile
     environment:
-      DATABASE_URL: postgresql://eli_user:eli_password@postgres:5432/eli_test_strips
+      DATABASE_URL: postgresql://eli_user:eli_password@localhost:5432/eli_test_strips
       NODE_ENV: development
     ports:
       - "3000:3000"

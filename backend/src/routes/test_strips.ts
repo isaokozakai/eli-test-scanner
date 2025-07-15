@@ -1,21 +1,19 @@
 import { Router } from "express";
 import multer from "multer";
-import path from "path";
 import fs from "fs";
+import { processTestStripImage } from "../services/image_processor";
+import { UPLOAD_DIR } from "../constants/paths";
 
 const router = Router();
 
-// root-level uploads path
-const uploadDir = path.join(__dirname, "..", "..", "uploads");
-
 // ensure uploads folder exists
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
+if (!fs.existsSync(UPLOAD_DIR)) {
+  fs.mkdirSync(UPLOAD_DIR);
 }
 
 // setup multer for file uploads
 const storage = multer.diskStorage({
-  destination: (_, __, cb) => cb(null, uploadDir),
+  destination: (_, __, cb) => cb(null, UPLOAD_DIR),
   filename: (_, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
 });
 

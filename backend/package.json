@@ -13,15 +13,18 @@
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "image-size": "^2.0.2",
+    "jsqr": "^1.4.0",
     "multer": "^2.0.1",
     "pg": "^8.16.3",
-    "sharp": "^0.34.3"
+    "sharp": "^0.34.3",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
     "@types/multer": "^2.0.0",
     "@types/node": "^24.0.14",
+    "@types/pg": "^8.15.4",
     "jest": "^30.0.4",
     "nodemon": "^3.1.10",
     "ts-jest": "^29.4.0",
