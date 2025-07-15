@@ -32,17 +32,16 @@ const upload = multer({
 });
 
 // upload endpoint
-router.post("/upload", upload.single("image"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: "No image provided." });
-  }
+router.post("/upload", upload.single("image"), async (req, res) => {
+  try {
+    const file = req.file;
+    if (!file) return res.status(400).json({ error: "No file uploaded" });
 
-  res.json({
-    id: Date.now().toString(),
-    fileName: req.file.filename,
-    filePath: `/uploads/${req.file.filename}`,
-    status: "pending",
-  });
+    const result = await processTestStripImage(file.path);
+    return res.status(200).json(result);
+  } catch (error: any) {
+    return res.status(500).json({ error: error.message });
+  }
 });
 
-export { router as uploadRouter };
+export { router as testStripsRouter };
