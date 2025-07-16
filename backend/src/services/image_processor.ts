@@ -3,14 +3,9 @@ import sharp from "sharp";
 import sizeOf from "image-size";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
-import { Pool } from "pg";
 import jsQR from "jsqr";
 import { UPLOAD_DIR } from "../constants/paths";
-
-// setup DB connection (make sure DATABASE_URL is set in env)
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+import pool from "../database";
 
 export async function processTestStripImage(filePath: string) {
   const id = uuidv4();
