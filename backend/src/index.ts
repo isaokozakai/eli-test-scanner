@@ -1,9 +1,9 @@
-import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
+
+import express from "express";
 import { testStripsRouter } from "./routes/test_strips";
 import { UPLOAD_DIR } from "./constants/paths";
-
-dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
