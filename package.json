@@ -5,8 +5,18 @@
   "author": "Isao Kozakai <isaokozakai@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "backend",
-    "mobile"
-  ]
+  "workspaces": {
+    "packages": [
+      "backend",
+      "mobile"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**",
+      "**/react-native-gradle-plugin",
+      "**/react-native-gradle-plugin/**",
+      "**/react-native-vision-camera",
+      "**/react-native-vision-camera/**"
+    ]
+  }
 }
