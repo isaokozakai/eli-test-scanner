@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import HistoryScreen from './screens/HistoryScreen';
-import CameraModal from './screens/CameraModal';
+import HistoryScreen from './components/HistoryScreen';
+import CameraModal from './components/CameraModal';
 
 export default function App() {
   const [openCamera, setOpenCamera] = useState(false);
