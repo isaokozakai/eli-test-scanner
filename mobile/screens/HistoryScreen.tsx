@@ -6,32 +6,45 @@ import {
   RefreshControl,
   Alert,
   StyleSheet,
+  Button,
 } from 'react-native';
+
+type HistoryProps = {
+  openCamera: () => void;
+};
 
 type Submission = {
   id: number;
-  timestamp: string;
-  note: string;
+  thumbnail_path: string;
+  created_at: string;
+  status: string;
 };
 
-export default function HistoryScreen() {
+export default function HistoryScreen({ openCamera }: HistoryProps) {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
   const fetchData = async () => {
     setRefreshing(true);
     try {
-      // Simulate fetch
-      await new Promise(res => setTimeout(res, 1000));
-      const mock = [
-        { id: 1, timestamp: '2025-07-17 10:00', note: 'Test A' },
-        { id: 2, timestamp: '2025-07-16 09:30', note: 'Test B' },
-      ];
-      setSubmissions(mock);
+      const response = await fetch('http://192.168.0.18:3000/api/test-strips', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to load submissions');
+      }
+
+      const data = await response.json();
+      setSubmissions(data as Submission[]);
     } catch (e) {
-      Alert.alert('Failed to fetch history');
+      Alert.alert('Error', 'Load failed.');
+    } finally {
+      setRefreshing(false);
     }
-    setRefreshing(false);
   };
 
   useEffect(() => {
@@ -39,20 +52,23 @@ export default function HistoryScreen() {
   }, []);
 
   return (
-    <FlatList
-      data={submissions}
-      keyExtractor={item => item.id.toString()}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={fetchData} />
-      }
-      contentContainerStyle={styles.list}
-      renderItem={({ item }) => (
-        <View style={styles.item}>
-          <Text style={styles.timestamp}>{item.timestamp}</Text>
-          <Text>{item.note}</Text>
-        </View>
-      )}
-    />
+    <View>
+      <Button title="Open Camera" onPress={openCamera} />
+      <FlatList
+        data={submissions}
+        keyExtractor={item => item.id.toString()}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={fetchData} />
+        }
+        contentContainerStyle={styles.list}
+        renderItem={({ item }) => (
+          <View style={styles.item}>
+            <Text style={styles.text}>{item.status}</Text>
+            <Text style={styles.text}>{item.created_at}</Text>
+          </View>
+        )}
+      />
+    </View>
   );
 }
 
@@ -65,7 +81,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#ccc',
   },
-  timestamp: {
+  text: {
     fontWeight: 'bold',
   },
 });
