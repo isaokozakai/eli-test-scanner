@@ -1,45 +1,51 @@
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Camera, useCameraDevice } from 'react-native-vision-camera';
-import { useEffect, useState } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import CameraScreen from './screens/CameraScreen';
+import HistoryScreen from './screens/HistoryScreen';
 
-export default function CameraScreen() {
+const Stack = createNativeStackNavigator();
+
+export default function App() {
   const [hasPermission, setHasPermission] = useState(false);
   const device = useCameraDevice('back');
 
   useEffect(() => {
     (async () => {
-      const permission = (await Camera.requestCameraPermission()) as
-        | 'authorized'
-        | 'denied'
-        | 'not-determined'
-        | 'restricted';
+      const permission = (await Camera.requestCameraPermission()) as string;
       setHasPermission(permission === 'authorized');
     })();
   }, []);
 
-  if (device == null) return <Text style={styles.message}>Loading...</Text>;
-  if (!hasPermission)
-    return <Text style={styles.message}>No camera permission</Text>;
-
   return (
-    <Camera
-      style={styles.camera}
-      device={device}
-      isActive={true}
-      photo={true}
-    />
+    <GestureHandlerRootView style={styles.container}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Camera">
+          <Stack.Screen
+            name="Camera"
+            component={() =>
+              device && hasPermission ? (
+                <CameraScreen device={device} />
+              ) : (
+                <View style={styles.centered}>
+                  <Text>Loading camera...</Text>
+                </View>
+              )
+            }
+          />
+          <Stack.Screen name="History" component={HistoryScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 
 const styles = StyleSheet.create({
-  camera: {
+  container: {
     flex: 1,
   },
-  message: {
-    flex: 1,
-    textAlign: 'center',
-    textAlignVertical: 'center', // Android vertical center
-    fontSize: 18,
-    color: '#333',
-  },
+  centered: { flex: 1, justifyContent: 'center', alignItems: 'center' },
 });

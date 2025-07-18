@@ -13,10 +13,16 @@
     "nohoist": [
       "**/react-native",
       "**/react-native/**",
-      "**/react-native-gradle-plugin",
-      "**/react-native-gradle-plugin/**",
       "**/react-native-vision-camera",
-      "**/react-native-vision-camera/**"
+      "**/react-native-vision-camera/**",
+      "**/react-native-gesture-handler",
+      "**/react-native-gesture-handler/**",
+      "**/react-native-screens",
+      "**/react-native-screens/**",
+      "**/react-native-safe-area-context",
+      "**/react-native-safe-area-context/**",
+      "**/@react-native/gradle-plugin",
+      "**/@react-native/gradle-plugin/**"
     ]
   }
 }
