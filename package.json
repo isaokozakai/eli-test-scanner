@@ -22,7 +22,9 @@
       "**/react-native-safe-area-context",
       "**/react-native-safe-area-context/**",
       "**/@react-native/gradle-plugin",
-      "**/@react-native/gradle-plugin/**"
+      "**/@react-native/gradle-plugin/**",
+      "**/@testing-library",
+      "**/@testing-library/**"
     ]
   }
 }

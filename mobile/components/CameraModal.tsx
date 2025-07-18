@@ -126,7 +126,7 @@ export default function CameraModal({ onClose }: CameraProps) {
         <View style={styles.overlayTop}>
           <Button title="Close" onPress={onClose} />
         </View>
-        <View style={styles.overlay}>
+        <View style={styles.overlayBottom}>
           <TouchableOpacity onPress={takePhoto} style={styles.button}>
             <Text style={styles.buttonText}>Take Photo</Text>
           </TouchableOpacity>
@@ -171,11 +171,11 @@ const styles = StyleSheet.create({
   },
   overlayTop: {
     position: 'absolute',
-    top: 20,
+    top: 10,
     width: '100%',
     alignItems: 'center',
   },
-  overlay: {
+  overlayBottom: {
     position: 'absolute',
     bottom: 40,
     width: '100%',
