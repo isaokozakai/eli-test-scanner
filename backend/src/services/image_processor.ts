@@ -5,7 +5,8 @@ import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import jsQR from "jsqr";
 import { UPLOAD_DIR } from "../constants/paths";
-import pool from "../database";
+import { extractQrCodeFromImageBuffer } from "../utils/qr";
+import { saveTestStrip } from "../database";
 
 export async function processTestStripImage(filePath: string) {
   const id = uuidv4();
@@ -32,57 +33,20 @@ export async function processTestStripImage(filePath: string) {
     .ensureAlpha()
     .toBuffer({ resolveWithObject: true });
 
-  let qrCode: string | null = null;
-  let status = "invalid";
-  let errorMessage: string | null = null;
-
-  try {
-    const qr = jsQR(
-      new Uint8ClampedArray(raw.data),
-      raw.info.width,
-      raw.info.height
-    );
-    if (qr?.data) {
-      qrCode = qr.data;
-
-      if (qrCode === "ELI-2024-999") {
-        status = "expired";
-        errorMessage = "Test strip expired";
-      } else if (qrCode.startsWith("ELI-2025")) {
-        status = "valid";
-      } else {
-        status = "invalid";
-        errorMessage = "Unknown QR code format";
-      }
-    } else {
-      errorMessage = "QR code not found";
-    }
-  } catch (err: any) {
-    errorMessage = "QR code processing error: " + err.message;
-  }
-
-  // save to DB
-  await pool.query(
-    `INSERT INTO test_strip_submissions 
-      (id, qr_code, original_image_path, thumbnail_path, image_size, image_dimensions, status, error_message)
-     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-    [
-      id,
-      qrCode,
-      originalImagePath,
-      thumbnailPath,
-      imageBuffer.length,
-      imageSizeStr,
-      status,
-      errorMessage,
-    ]
+  const { qrCode, status, errorMessage } = extractQrCodeFromImageBuffer(
+    raw.data,
+    raw.info.width,
+    raw.info.height
   );
 
-  return {
+  return saveTestStrip({
     id,
-    status,
     qrCode,
-    quality: "n/a",
-    processedAt: new Date().toISOString(),
-  };
+    originalImagePath,
+    thumbnailPath,
+    imageBufferLength: imageBuffer.length,
+    imageSizeStr,
+    status,
+    errorMessage,
+  });
 }

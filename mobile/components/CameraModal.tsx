@@ -123,8 +123,10 @@ export default function CameraModal({ onClose }: CameraProps) {
             onCodeScanned: handleQRCodeScanned,
           }}
         />
-        <View style={styles.overlay}>
+        <View style={styles.overlayTop}>
           <Button title="Close" onPress={onClose} />
+        </View>
+        <View style={styles.overlay}>
           <TouchableOpacity onPress={takePhoto} style={styles.button}>
             <Text style={styles.buttonText}>Take Photo</Text>
           </TouchableOpacity>
@@ -166,6 +168,12 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     gap: 20,
+  },
+  overlayTop: {
+    position: 'absolute',
+    top: 20,
+    width: '100%',
+    alignItems: 'center',
   },
   overlay: {
     position: 'absolute',

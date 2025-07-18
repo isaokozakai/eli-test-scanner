@@ -3,7 +3,7 @@ import multer from "multer";
 import fs from "fs";
 import { processTestStripImage } from "../services/image_processor";
 import { UPLOAD_DIR } from "../constants/paths";
-import pool from "../database";
+import { getTestStrip, getTestStrips } from "../database";
 
 const router = Router();
 
@@ -46,10 +46,8 @@ router.post("/upload", upload.single("image"), async (req, res) => {
 // get submissions list endpoint
 router.get("/", async (req, res) => {
   try {
-    const result = await pool.query(
-      "SELECT id, qr_code, status, thumbnail_path, created_at FROM test_strip_submissions ORDER BY created_at DESC"
-    );
-    res.json(result.rows);
+    const rows = await getTestStrips();
+    res.json(rows);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
@@ -58,14 +56,11 @@ router.get("/", async (req, res) => {
 // get submission detail endpoint
 router.get("/:id", async (req, res) => {
   try {
-    const result = await pool.query(
-      "SELECT * FROM test_strip_submissions WHERE id = $1",
-      [req.params.id]
-    );
-    if (result.rows.length === 0) {
+    const rows = await getTestStrip(req.params.id);
+    if (rows.length === 0) {
       return res.status(404).json({ error: "Not found" });
     }
-    res.json(result.rows[0]);
+    res.json(rows[0]);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
