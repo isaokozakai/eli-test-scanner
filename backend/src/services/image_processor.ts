@@ -3,7 +3,6 @@ import sharp from "sharp";
 import sizeOf from "image-size";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
-import jsQR from "jsqr";
 import { UPLOAD_DIR } from "../constants/paths";
 import { extractQrCodeFromImageBuffer } from "../utils/qr";
 import { saveTestStrip } from "../database";
