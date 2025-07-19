@@ -22,17 +22,78 @@ This project is a full-stack mobile and backend application for scanning and upl
 * Upload image to backend API
 * View history of uploaded test strips
 
-### Running the Mobile App
+
+## 🛠️ Mobile Setup Instructions
+
+### 📱 Android Setup
+
+1. **Install dependencies**
+  
+```bash
+yarn install
+```
+   
+2. **Start Metro bundler**
 
 ```bash
-cd mobile
-yarn install
-yarn start
+npx react-native start
+```
+3. **Run the Android app**
+
+```bash
+npx react-native run-android
 ```
 
-Make sure the backend is running at `http://localhost:3000` or configure the endpoint accordingly.
+<br />
 
-To run tests:
+**Device requirements**
+
+* Use a physical Android device or emulator with a camera
+
+* Enable camera and file system permissions in your device/emulator settings
+
+<br />
+
+### 📱 iOS Setup
+1. **Install CocoaPods (if not already installed)**
+
+```bash
+sudo gem install cocoapods
+```
+
+2. **Install iOS dependencies**
+
+```bash
+cd ios
+pod install
+cd ..
+```
+
+3. **Start Metro bundler**
+
+```bash
+npx react-native start
+```
+
+4. **Run the iOS app**
+
+```bash
+npx react-native run-ios
+```
+
+<br />
+
+**Device requirements**
+
+* Use a physical iPhone or a simulator that supports camera (simulators may have limited camera functionality)
+
+* Grant camera and media library access permissions when prompted
+
+* Make sure the backend is running at `http://localhost:3000` or configure the endpoint accordingly.
+
+<br />
+
+**To run tests:**
 
 ```bash
 yarn test
@@ -81,7 +142,8 @@ Start a PostgreSQL instance
 Expose the API at http://localhost:3000
 
 <br />
-To run tests:
+
+**To run tests:**
 
 ```bash
 yarn test
