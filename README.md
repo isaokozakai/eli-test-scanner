@@ -7,6 +7,16 @@ This project is a full-stack mobile and backend application for scanning and upl
 
 ---
 
+## ✅ Prerequisites
+
+- Node.js >= 18.x
+- Yarn
+- Android Studio / Xcode
+- CocoaPods (for iOS)
+- Docker (for backend)
+
+---
+
 ## 📱 Mobile App
 
 ### Tech Stack
