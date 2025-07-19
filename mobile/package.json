@@ -43,9 +43,6 @@
     "react-test-renderer": "19.1.0",
     "typescript": "5.0.4"
   },
-  "resolutions": {
-    "react-native-gesture-handler": "^2.27.1"
-  },
   "engines": {
     "node": ">=18"
   }

@@ -74,7 +74,8 @@ export default function CameraModal({ onClose }: CameraProps) {
       } as any);
 
       const response = await fetch(
-        'http://192.168.0.18:3000/api/test-strips/upload',
+        // TIP: use your local IP address (e.g. http://192.168.x.x:3000) instead of 'localhost' when testing on a physical device
+        'http://localhost:3000/api/test-strips/upload',
         {
           method: 'POST',
           body: formData,
