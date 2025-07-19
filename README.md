@@ -14,7 +14,7 @@ This project is a full-stack mobile and backend application for scanning and upl
 * React Native
 * TypeScript
 * VisionCamera
-* Jest
+* Testing Library + Jest (testing)
 
 ### Features
 
@@ -113,7 +113,7 @@ project-root/
 
 ## 🧪 Testing
 
-* **Mobile:** Uses `@testing-library/react-native` and Jest.
+* **Mobile:** Uses Testing Library and Jest.
 * **Backend:** Uses Jest and Supertest. Includes integration tests for upload and list APIs.
 
 ---
