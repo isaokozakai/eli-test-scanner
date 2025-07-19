@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -29,6 +29,12 @@ export default function CameraModal({ onClose }: CameraProps) {
 
   const cameraRef = useRef<Camera>(null);
   const device = useCameraDevice('back');
+
+  useEffect(() => {
+    if (!hasPermission) {
+      requestPermission();
+    }
+  });
 
   const handleQRCodeScanned = (codes: any[]) => {
     const value = codes[0]?.value;
@@ -101,16 +107,9 @@ export default function CameraModal({ onClose }: CameraProps) {
     setPreviewVisible(false);
   };
 
-  if (!hasPermission)
-    return (
-      <View style={styles.centered}>
-        <Text>We need access to your camera</Text>
-        <Button title="Grant Permission" onPress={requestPermission} />
-      </View>
-    );
-
   return (
-    device && (
+    device &&
+    hasPermission && (
       <>
         <Camera
           ref={cameraRef}
@@ -161,14 +160,6 @@ export default function CameraModal({ onClose }: CameraProps) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  topOverlay: {
-    position: 'absolute',
-    top: 30,
-    width: '100%',
-    alignItems: 'center',
-    gap: 20,
-  },
   overlayTop: {
     position: 'absolute',
     top: 10,
@@ -187,12 +178,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   buttonText: { color: '#fff', fontWeight: 'bold' },
-  centered: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    rowGap: 20,
-  },
   modalContainer: {
     flex: 1,
     backgroundColor: '#000000cc',
