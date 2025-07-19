@@ -1,7 +1,4 @@
 const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
-const path = require('path');
-
-const defaultConfig = getDefaultConfig(__dirname);
 
 /**
  * Metro configuration
@@ -9,19 +6,6 @@ const defaultConfig = getDefaultConfig(__dirname);
  *
  * @type {import('@react-native/metro-config').MetroConfig}
  */
-const config = {
-  projectRoot: __dirname,
-  resolver: {
-    extraNodeModules: {
-        react: path.resolve(__dirname, '../node_modules/react'),
-        'react-native': path.resolve(__dirname, '../node_modules/react-native'),
-        'react-native-gesture-handler': path.resolve(__dirname, '../node_modules/react-native-gesture-handler'),
-        '@react-navigation/native-stack': path.resolve(__dirname, '../node_modules/@react-navigation/native-stack'),
-    },
-  },
-  watchFolders: [
-    path.resolve(__dirname, '../'),
-  ],
-};
+const config = {};
 
-module.exports = mergeConfig(defaultConfig, config);
+module.exports = mergeConfig(getDefaultConfig(__dirname), config);

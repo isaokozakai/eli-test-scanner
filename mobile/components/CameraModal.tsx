@@ -34,7 +34,7 @@ export default function CameraModal({ onClose }: CameraProps) {
     if (!hasPermission) {
       requestPermission();
     }
-  });
+  }, [hasPermission]);
 
   const handleQRCodeScanned = (codes: any[]) => {
     const value = codes[0]?.value;
@@ -66,7 +66,6 @@ export default function CameraModal({ onClose }: CameraProps) {
     setIsSubmitting(true);
     try {
       const formData = new FormData();
-      // formData.append('qrCode', qrCode);
 
       formData.append('image', {
         uri: photoUri,
@@ -89,9 +88,7 @@ export default function CameraModal({ onClose }: CameraProps) {
         throw new Error('Failed to submit');
       }
 
-      Alert.alert('Success', 'Submission successful.', undefined, {
-        onDismiss: onClose,
-      });
+      Alert.alert('Success', 'Submission successful.');
       reset();
     } catch (e) {
       console.log({ e });
