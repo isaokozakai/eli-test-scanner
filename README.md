@@ -54,23 +54,33 @@ yarn test
 ### API Endpoints
 
 #### `POST /api/test-strips/upload`
-
 * Accepts an image file in form-data under `image`
 * Saves image and creates a thumbnail
 * Returns JSON metadata
 
 #### `GET /api/test-strips`
-
 * Returns list of uploaded test strips
+
+#### `GET /api/test-strips/:id`
+* Returns details of a uploaded test strip
 
 ### Running the Backend
 
+To start the backend server and database using Docker Compose:
+
 ```bash
-cd backend
-yarn install
-yarn dev
+docker-compose up --build
 ```
 
+This will:
+
+Build and start the backend server
+
+Start a PostgreSQL instance
+
+Expose the API at http://localhost:3000
+
+<br />
 To run tests:
 
 ```bash
@@ -110,7 +120,7 @@ project-root/
 
 ## ✅ Integration Test Coverage
 
-The test in `server/tests/upload.test.ts` simulates the upload flow from a client, making it an integration test. It covers the full flow:
+The test in `backend/src/routes/__tests__/test_strips.test.ts` simulates the upload flow from a client, making it an integration test. It covers the full flow:
 
 * sending an image to the backend
 * mocking the database
@@ -118,16 +128,9 @@ The test in `server/tests/upload.test.ts` simulates the upload flow from a clien
 
 ---
 
-## 📸 Sample Image for Testing
-
-Place your sample image `test-strip-valid-1.png` inside the `server/tests/` folder to test the upload flow.
-
----
-
 ## 🛠️ Notes
 
 * Ensure required native modules are installed and properly linked when running the mobile app.
 * Image uploads are stored locally in `uploads/`.
-* Thumbnail generation uses Sharp.
-* No external DB required — in-memory mock used.
+* No external DB required.
 
