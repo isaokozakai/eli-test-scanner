@@ -11,12 +11,6 @@ const defaultConfig = getDefaultConfig(__dirname);
  */
 const config = {
   projectRoot: __dirname,
-  resolver: {
-    extraNodeModules: {
-        'react-native-gesture-handler': path.resolve(__dirname, '../node_modules/react-native-gesture-handler'),
-        '@react-navigation/native-stack': path.resolve(__dirname, '../node_modules/@react-navigation/native-stack'),
-    },
-  },
   watchFolders: [
     path.resolve(__dirname, '../'),
   ],
