@@ -11,9 +11,10 @@ This project is a full-stack mobile and backend application for scanning and upl
 
 - Node.js >= 18.x
 - Yarn
+- React Native CLI
 - Android Studio / Xcode
 - CocoaPods (for iOS)
-- Docker (for backend)
+- Docker
 
 ---
 
