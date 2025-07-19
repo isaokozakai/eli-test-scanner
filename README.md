@@ -46,14 +46,6 @@ npx react-native run-android
 
 <br />
 
-**Device requirements**
-
-* Use a physical Android device or emulator with a camera
-
-* Enable camera and file system permissions in your device/emulator settings
-
-<br />
-
 ### 📱 iOS Setup
 1. **Install CocoaPods (if not already installed)**
 
@@ -80,16 +72,6 @@ npx react-native start
 ```bash
 npx react-native run-ios
 ```
-
-<br />
-
-**Device requirements**
-
-* Use a physical iPhone or a simulator that supports camera (simulators may have limited camera functionality)
-
-* Grant camera and media library access permissions when prompted
-
-* Make sure the backend is running at `http://localhost:3000` or configure the endpoint accordingly.
 
 <br />
 
