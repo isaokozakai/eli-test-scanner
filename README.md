@@ -182,9 +182,8 @@ The test in `backend/src/routes/__tests__/test_strips.test.ts` simulates the upl
 
 ---
 
-## 🛠️ Notes
+## ⚠️ Known Limitations & Assumptions
 
-* Ensure required native modules are installed and properly linked when running the mobile app.
-* Image uploads are stored locally in `uploads/`.
-* No external DB required.
-
+- Images are stored locally on the backend server; no cloud storage is currently integrated.
+- Authentication for backend APIs is not implemented.
+- Frontend does not show real-time upload progress.
