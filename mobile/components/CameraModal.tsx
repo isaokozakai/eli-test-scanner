@@ -24,8 +24,8 @@ export default function CameraModal({ onClose }: CameraProps) {
   const { hasPermission, requestPermission } = useCameraPermission();
   const [qrCode, setQrCode] = useState<string | null>(null);
   const [photoUri, setPhotoUri] = useState<string | null>(null);
-  const [isPreviewVisible, setPreviewVisible] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const cameraRef = useRef<Camera>(null);
   const device = useCameraDevice('back');
@@ -63,7 +63,7 @@ export default function CameraModal({ onClose }: CameraProps) {
       return;
     }
 
-    setIsSubmitting(true);
+    setSubmitting(true);
     try {
       const formData = new FormData();
 
@@ -94,7 +94,7 @@ export default function CameraModal({ onClose }: CameraProps) {
       console.log({ e });
       Alert.alert('Error', 'Submission failed.');
     } finally {
-      setIsSubmitting(false);
+      setSubmitting(false);
     }
   };
 
@@ -127,7 +127,7 @@ export default function CameraModal({ onClose }: CameraProps) {
             <Text style={styles.buttonText}>Take Photo</Text>
           </TouchableOpacity>
         </View>
-        <Modal visible={isPreviewVisible} transparent animationType="slide">
+        <Modal visible={previewVisible} transparent animationType="slide">
           <View style={styles.modalContainer}>
             {photoUri && (
               <Image source={{ uri: photoUri }} style={styles.previewImage} />
@@ -140,9 +140,9 @@ export default function CameraModal({ onClose }: CameraProps) {
               <TouchableOpacity
                 onPress={handleSubmit}
                 style={styles.submitButton}
-                disabled={isSubmitting}
+                disabled={submitting}
               >
-                {isSubmitting ? (
+                {submitting ? (
                   <ActivityIndicator color="#fff" />
                 ) : (
                   <Text style={styles.buttonText}>Submit</Text>
