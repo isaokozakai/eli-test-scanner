@@ -185,6 +185,9 @@ The test in `backend/src/routes/__tests__/test_strips.test.ts` simulates the upl
 
 ## ⚠️ Known Limitations & Assumptions
 
-- Images are stored locally on the backend server; no cloud storage is currently integrated.
-- Authentication for backend APIs is not implemented.
-- Frontend does not show real-time upload progress.
+- Images are stored locally on the backend server; no cloud storage is integrated.
+- Backend APIs are not protected by authentication.
+- QR code detection on backend is not fully reliable — the image must be high quality for successful detection.
+- Frontend does not display real-time upload progress.
+- QR code detection on frontend should occur after a photo is taken, not while the camera is open.
+
