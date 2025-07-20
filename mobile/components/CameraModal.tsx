@@ -121,7 +121,13 @@ export default function CameraModal({ onClose }: CameraProps) {
           }}
         />
         <View style={styles.overlayTop}>
-          <Button title="Close" onPress={onClose} />
+          <Button
+            title="Close"
+            onPress={() => {
+              reset();
+              onClose();
+            }}
+          />
         </View>
         <View style={styles.overlayBottom}>
           <TouchableOpacity onPress={takePhoto} style={styles.button}>
