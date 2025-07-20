@@ -38,8 +38,8 @@ router.post("/upload", upload.single("image"), async (req, res) => {
 
     const result = await processTestStripImage(file.path);
     return res.status(200).json(result);
-  } catch (error: any) {
-    return res.status(500).json({ error: error.message });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
   }
 });
 
