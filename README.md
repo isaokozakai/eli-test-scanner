@@ -152,16 +152,19 @@ project-root/
 ├── mobile/              # React Native mobile app
 │   ├── App.tsx
 │   ├── components/
-│   ├── __tests__/
 │   └── ...
 │
 ├── backend/             # Express.js backend
 │   ├── index.ts         # Main server entry
 │   ├── database.ts      # Data access layer
 │   ├── routes/          # Express routes
-│   └── tests/           # Integration tests using Supertest
+│   ├── services/        # Business logic modules (e.g. image processing)
+│   ├── utils/           # Utility functions and helpers (e.g. file I/O, formatting)
+│   └── ...
 │
-└── README.md
+├── uploads/             # Local storage for uploaded images
+│
+└── ...
 ```
 
 ---
