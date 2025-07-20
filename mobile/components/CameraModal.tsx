@@ -37,10 +37,8 @@ export default function CameraModal({ onClose }: CameraProps) {
   }, [hasPermission]);
 
   const handleQRCodeScanned = (codes: any[]) => {
-    const value = codes[0]?.value;
-    if (value) {
-      setQrCode(value);
-    }
+    const value = codes[0]?.value ?? null;
+    setQrCode(value);
   };
 
   const takePhoto = async () => {
