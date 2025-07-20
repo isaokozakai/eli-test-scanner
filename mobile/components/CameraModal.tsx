@@ -38,7 +38,7 @@ export default function CameraModal({ onClose }: CameraProps) {
 
   const handleQRCodeScanned = (codes: any[]) => {
     const value = codes[0]?.value;
-    if (value && !qrCode) {
+    if (value) {
       setQrCode(value);
     }
   };
