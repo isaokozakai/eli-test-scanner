@@ -26,7 +26,11 @@ export async function processTestStripImage(filePath: string) {
   const imageSizeStr = `${dimensions.width}x${dimensions.height}`;
 
   // convert to raw pixels with alpha channel for QR detection
-  const sharpImg = sharp(imageBuffer);
+  const sharpImg = sharp(imageBuffer).resize({
+    width: 800,
+    withoutEnlargement: true,
+  });
+
   const raw = await sharpImg
     .raw()
     .ensureAlpha()
