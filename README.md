@@ -147,7 +147,7 @@ yarn test
 ## 📁 Folder Structure
 
 ```
-project-root/
+eli-test-scanner/
 │
 ├── mobile/              # React Native mobile app
 │   ├── App.tsx
